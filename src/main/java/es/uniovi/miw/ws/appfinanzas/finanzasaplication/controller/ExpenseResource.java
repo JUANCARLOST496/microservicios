@@ -1,11 +1,9 @@
 package es.uniovi.miw.ws.appfinanzas.finanzasaplication.controller;
-
 import es.uniovi.miw.ws.appfinanzas.finanzasaplication.model.Expense;
 import es.uniovi.miw.ws.appfinanzas.finanzasaplication.model.ExpenseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -13,7 +11,7 @@ import java.util.Optional;
 @RequestMapping("/gastos")
 public class ExpenseResource {
     @Autowired
-    private ExpenseRepository expenseRepository;
+    public ExpenseRepository expenseRepository;
 
     @GetMapping
     public List<Expense> getExpenses() {
