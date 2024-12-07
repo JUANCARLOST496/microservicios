@@ -30,13 +30,13 @@ public class ExpenseResource {
 
    if(optionalExpenses.isPresent()){
        Expense expense = optionalExpenses.get();
-       if(updatedExpense.getDescription()!=null && updatedExpense.getDescription().isEmpty()){
+       if(updatedExpense.getDescription()!=null && !updatedExpense.getDescription().isEmpty()){
           expense.setDescription(updatedExpense.getDescription());
        }
        if(updatedExpense.getAmount()!=0){
            expense.setAmount(updatedExpense.getAmount());
        }
-       if(updatedExpense.getExpenseType()!=null && updatedExpense.getExpenseType().isEmpty()){
+       if(updatedExpense.getExpenseType()!=null && !updatedExpense.getExpenseType().isEmpty()){
            expense.setExpenseType(updatedExpense.getExpenseType());
        }
        expenseRepository.save(expense);
@@ -46,4 +46,25 @@ public class ExpenseResource {
        }
 
     }
+
+    @DeleteMapping("/{idExpense}")
+    public ResponseEntity<String> deleteExpense(@PathVariable int idExpense) {
+        // Buscar el gasto por ID en la base de datos
+        Optional<Expense> optionalExpense = expenseRepository.findById(idExpense);
+
+        // Verificar si el gasto existe
+        if (optionalExpense.isPresent()) {
+            Expense expense = optionalExpense.get();
+            expenseRepository.delete(expense); // Eliminar el gasto de la base de datos
+            return ResponseEntity.ok("Gasto eliminado correctamente");
+        }
+
+        // Si no se encuentra el gasto
+        return ResponseEntity.status(404).body("Gasto no encontrado");
+    }
+
+
+
+
+
 }
