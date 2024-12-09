@@ -15,6 +15,7 @@ public class ExpenseResource {
 
     @GetMapping
     public List<Expense> getExpenses() {
+        System.out.println("getExpenses() llamado");
         return expenseRepository.findAll(); // Recupera todos los gastos desde la base de datos
     }
 
