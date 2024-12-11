@@ -11,13 +11,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para pruebas con Postman
+                .csrf(csrf -> csrf.disable()) // Deshabilitar CSRF para evitar problemas en pruebas con clientes
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/login").permitAll() // Rutas públicas
-                        .anyRequest().authenticated() // Rutas protegidas
+                        .requestMatchers("/auth/login").permitAll() // Permitir acceso público al endpoint de login
+                        .requestMatchers(org.springframework.http.HttpMethod.OPTIONS, "/**").permitAll() // Permitir todas las solicitudes OPTIONS para CORS
+                        .requestMatchers("/gastos/**").authenticated() // Proteger las rutas de gastos
+                        .requestMatchers("/some-public-endpoint/**").permitAll() // Hacer público un endpoint específico
+                        .anyRequest().authenticated() // Proteger cualquier otra solicitud
                 )
-                .addFilterBefore(new JwtFilter(), org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class); // Registrar el filtro
+                .addFilterBefore(new JwtFilter(), org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter.class); // Registrar el filtro JWT para validar tokens
         return http.build();
     }
 }
-
