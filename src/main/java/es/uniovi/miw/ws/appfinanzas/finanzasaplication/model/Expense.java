@@ -6,8 +6,6 @@ import lombok.Setter;
 
 @Entity
 @Table(name = "expenses") // Nombre de la tabla en la base de datos (opcional)
-@Setter
-@Getter
 public class Expense {
     // Getters y Setters
     @Id
@@ -28,16 +26,32 @@ public class Expense {
         this.expenseType = expenseType;
     }
 
+    public int getIdExpense() {
+        return idExpense;
+    }
+
     public void setIdExpense(int idExpense) {
         this.idExpense = idExpense;
+    }
+
+    public String getDescription() {
+        return description;
     }
 
     public void setDescription(String description) {
         this.description = description;
     }
 
+    public double getAmount() {
+        return amount;
+    }
+
     public void setAmount(double amount) {
         this.amount = amount;
+    }
+
+    public String getExpenseType() {
+        return expenseType;
     }
 
     public void setExpenseType(String expenseType) {
