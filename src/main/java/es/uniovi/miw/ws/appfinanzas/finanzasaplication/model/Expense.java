@@ -1,19 +1,26 @@
 package es.uniovi.miw.ws.appfinanzas.finanzasaplication.model;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
 
 @Entity
-@Table(name = "expenses") // Nombre de la tabla en la base de datos (opcional)
+@Table(name = "expenses") // Nombre de la tabla en la base de datos
 public class Expense {
-    // Getters y Setters
+
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY) // Generación automática del ID
     private int idExpense;
+
+    @Column(nullable = false) // Indica que no puede ser nulo
     private String description;
+
+    @Column(nullable = false)
     private double amount;
+
+    @Column(nullable = false)
     private String expenseType;
+
+    @Version
+    private int version; // Control de concurrencia optimista
 
     // Constructor vacío (necesario para JPA)
     public Expense() {}
@@ -26,6 +33,7 @@ public class Expense {
         this.expenseType = expenseType;
     }
 
+    // Getters y Setters
     public int getIdExpense() {
         return idExpense;
     }
@@ -56,5 +64,13 @@ public class Expense {
 
     public void setExpenseType(String expenseType) {
         this.expenseType = expenseType;
+    }
+
+    public int getVersion() {
+        return version;
+    }
+
+    public void setVersion(int version) {
+        this.version = version;
     }
 }
