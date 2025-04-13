@@ -37,7 +37,7 @@ public class ExpenseResource {
 
         if (optionalExpense.isPresent()) {
             Expense expense = optionalExpense.get();
-            // Actualizar solo los campos no nulos
+
             if (updatedExpense.getDescription() != null) {
                 expense.setDescription(updatedExpense.getDescription());
             }
@@ -47,7 +47,7 @@ public class ExpenseResource {
             if (updatedExpense.getExpenseType() != null) {
                 expense.setExpenseType(updatedExpense.getExpenseType());
             }
-            expenseRepository.save(expense); // Guardar cambios en la base de datos
+            expenseRepository.save(expense);
             return ResponseEntity.ok("Gasto actualizado correctamente");
         }
 

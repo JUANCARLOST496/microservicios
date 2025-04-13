@@ -49,12 +49,6 @@ public class ExpenseSummaryResource {
                 .toList();
     }
 
-    // Agrupar todos los gastos por tipo
-    @GetMapping("/agrupados")
-    public Map<String, List<Expense>> getExpensesGroupedByType() {
-        return expenseRepository.findAll().stream()
-                .collect(Collectors.groupingBy(Expense::getExpenseType));
-    }
 
     // Filtrar gastos por un tipo específico
     @GetMapping("/agrupados/{expenseType}")

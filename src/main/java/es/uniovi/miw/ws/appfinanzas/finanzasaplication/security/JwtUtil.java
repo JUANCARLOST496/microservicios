@@ -11,7 +11,7 @@ import java.security.Key;
 public class JwtUtil {
 
     // La misma clave secreta usada en el servicio de login
-    private static final String SECRET_KEY = "my-super-secret-key-for-jwt-generation-12345678"; // ¡Asegúrate de que coincida!
+    private static final String SECRET_KEY = "my-super-secret-key-for-jwt-generation-12345678";
     private static final Key KEY = Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
 
     // Método para validar el token
